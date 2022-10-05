@@ -1,18 +1,31 @@
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 
 namespace SeleniumPracticeL6
 {
     public class Tests
     {
-        [SetUp]
+        IWebDriver driver;
+
+        [OneTimeSetUp]
         public void Setup()
         {
+            driver = new ChromeDriver(@"H:\L6\SeleniumPracticeL6\SeleniumPracticeL6");
         }
 
         [Test]
-        public void Test1()
+        public void CheckAddition()
         {
-            Assert.Pass();
+            //Arrange
+            driver.Navigate().GoToUrl("http://www.google.com");
+            
+            //Act
+
+
+            //Assert
+
+
         }
     }
 }
