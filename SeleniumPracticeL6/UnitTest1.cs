@@ -11,21 +11,51 @@ namespace SeleniumPracticeL6
         [OneTimeSetUp]
         public void Setup()
         {
-            driver = new ChromeDriver(@"H:\L6\SeleniumPracticeL6\SeleniumPracticeL6");
+            ChromeOptions options = new ChromeOptions();
+            //headless makes it so the test is done in the background (browser does not get opened)
+            options.AddArgument("--headless");
+
+            driver = new ChromeDriver(@"H:\L6\SeleniumPracticeL6\SeleniumPracticeL6", options);
         }
 
         [Test]
-        public void CheckAddition()
+        public void CheckPageTitle()
         {
             //Arrange
-            driver.Navigate().GoToUrl("http://www.google.com");
-            
-            //Act
+            string title = string.Empty;
 
+            //Act
+            driver.Navigate().GoToUrl("https://www.next.co.uk/");
+
+            title = driver.Title;
 
             //Assert
+            Assert.AreEqual(title, "Next Official Site: Online Fashion, Kids Clothes & Homeware");
 
 
         }
+
+        [Test]
+        public void SearchForShoes()
+        {
+            //Arrange
+
+            //Act
+            driver.Navigate().GoToUrl("https://www.next.co.uk/");
+            IWebElement searchBar = driver.FindElement(By.Id("header-big-screen-search-box"));
+            searchBar.SendKeys("Shoes");
+            searchBar.SendKeys(Keys.Return);
+
+            //Assert
+            Assert.IsTrue(driver.Url.Contains(".next.co.uk/search?w=shoes"));
+        }
+
+        [OneTimeTearDown]
+        public void Clean()
+        {
+            driver.Close();
+        }
+
+
     }
 }
