@@ -13,7 +13,7 @@ namespace SeleniumPracticeL6
         {
             ChromeOptions options = new ChromeOptions();
             //headless makes it so the test is done in the background (browser does not get opened)
-            options.AddArgument("--headless");
+            //options.AddArgument("--headless");
 
             driver = new ChromeDriver(@"H:\L6\SeleniumPracticeL6\SeleniumPracticeL6", options);
         }
@@ -21,6 +21,7 @@ namespace SeleniumPracticeL6
         [Test]
         public void CheckPageTitle()
         {
+            /*
             //Arrange
             string title = string.Empty;
 
@@ -31,10 +32,46 @@ namespace SeleniumPracticeL6
 
             //Assert
             Assert.AreEqual(title, "Next Official Site: Online Fashion, Kids Clothes & Homeware");
+            */
 
+            //Test Case 1
+            //Arrange
+            string title = string.Empty;
+
+            //Act
+            driver.Navigate().GoToUrl("http://automationpractice.com/");
+
+            title = driver.Title;
+
+            //Assert
+            
 
         }
 
+        [Test]
+        public void CreateAccount()
+        {
+            //Arrange
+            driver.Navigate().GoToUrl("http://automationpractice.com/");
+            IWebElement signIn = driver.FindElement(By.ClassName("login"));
+            signIn.Click();
+
+            //Act
+            IWebElement email = driver.FindElement(By.Id("email_create"));
+            email.SendKeys("NotFake@FakeMail.com");
+            email.SendKeys(Keys.Return);
+
+            System.Threading.Thread.Sleep(30000);
+            //IWebElement form = driver.FindElement(By.Id("account-creation_form"));
+            IWebElement fname = driver.FindElement(By.Id("customer_firstname"));
+
+            fname.SendKeys("Bubble");
+
+
+            //Assert
+        }
+
+        /*
         [Test]
         public void SearchForShoes()
         {
@@ -49,12 +86,13 @@ namespace SeleniumPracticeL6
             //Assert
             Assert.IsTrue(driver.Url.Contains(".next.co.uk/search?w=shoes"));
         }
+        */
 
-        [OneTimeTearDown]
+        /*[OneTimeTearDown]
         public void Clean()
         {
             driver.Close();
-        }
+        }*/
 
 
     }
