@@ -2,6 +2,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace SeleniumPracticeL6
 {
@@ -48,11 +49,13 @@ namespace SeleniumPracticeL6
             
 
         }
-
-        
+                
         [Test]
         public void CreateAccount()
         {
+            var random = new Random();
+            int num = random.Next();
+
             //Arrange
             driver.Navigate().GoToUrl("http://automationpractice.com/");
             IWebElement signIn = driver.FindElement(By.ClassName("login"));
@@ -60,7 +63,7 @@ namespace SeleniumPracticeL6
 
             //Act
             IWebElement email = driver.FindElement(By.Id("email_create"));
-            email.SendKeys("NotFake@FakeMail.com");
+            email.SendKeys(num + "@FakeMail.com");
             email.SendKeys(Keys.Return);
 
             System.Threading.Thread.Sleep(30000);
