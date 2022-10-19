@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumPracticeL6
 {
@@ -48,6 +49,7 @@ namespace SeleniumPracticeL6
 
         }
 
+        
         [Test]
         public void CreateAccount()
         {
@@ -62,10 +64,45 @@ namespace SeleniumPracticeL6
             email.SendKeys(Keys.Return);
 
             System.Threading.Thread.Sleep(30000);
-            //IWebElement form = driver.FindElement(By.Id("account-creation_form"));
             IWebElement fname = driver.FindElement(By.Id("customer_firstname"));
-
             fname.SendKeys("Bubble");
+
+            IWebElement lname = driver.FindElement(By.Id("customer_lastname"));
+            lname.SendKeys("Cloud");
+
+            IWebElement password = driver.FindElement(By.Id("passwd"));
+            password.SendKeys("BubbleCloud123!");
+
+            IWebElement days = driver.FindElement(By.Id("days"));
+            SelectElement selectDays = new SelectElement(days);
+            selectDays.SelectByIndex(1);
+
+            IWebElement years = driver.FindElement(By.Id("years"));
+            SelectElement selectYears = new SelectElement(years);
+            selectYears.SelectByIndex(2);
+
+            IWebElement months = driver.FindElement(By.Id("months"));
+            SelectElement selectMonths = new SelectElement(months);
+            selectMonths.SelectByIndex(3);
+
+            IWebElement Address = driver.FindElement(By.Id("address1"));
+            Address.SendKeys("RealStreet 69");
+
+            IWebElement City = driver.FindElement(By.Id("city"));
+            City.SendKeys("Mars");
+
+            IWebElement state = driver.FindElement(By.Id("id_state"));
+            SelectElement selectState = new SelectElement(state);
+            selectState.SelectByIndex(3);
+
+            IWebElement ZIP = driver.FindElement(By.Id("postcode"));
+            ZIP.SendKeys("00000");
+
+            IWebElement Phone = driver.FindElement(By.Id("phone_mobile"));
+            Phone.SendKeys("1234567890");
+
+            IWebElement RegisterButton = driver.FindElement(By.Id("submitAccount"));
+            RegisterButton.Click();
 
 
             //Assert
